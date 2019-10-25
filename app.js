@@ -5,8 +5,12 @@ const buttons = [
     'blueBtn'
 ]
 
+// shuffle buttons...
+let sequenceLength = 1
+let sequence = []
+
 let playerSequnce = []
-let sequence = ['greenBtn', 'redBtn', 'yellowBtn', 'blueBtn']
+// let sequence = ['greenBtn', 'redBtn', 'yellowBtn', 'blueBtn']
 // let sequence = ['greenBtn']
 
 const clickedBtn = e => {
@@ -17,11 +21,13 @@ const clickedBtn = e => {
     console.log(sequenceEqualCheck(slicedSequnace, playerSequnce))
 
     if(!sequenceEqualCheck(slicedSequnace, playerSequnce)){
-        alert('wrong..... :(')
-        window.location.reload()
+        document.getElementById('cutout').innerHTML = 'Wrong <br> :(';
+        setTimeout(() => {
+            window.location.reload()
+        }, 1000);
     }
     if (sequence.length === playerSequnce.length && sequenceEqualCheck(slicedSequnace, playerSequnce)) {
-        alert('yayyyyyy....')
+        nextLevel()
     }
 }
 
@@ -32,6 +38,12 @@ for (let i = 0; i < buttons.length; i++) {
 }
 
 const initGame = sequence => {
+    for (let i = 0; i < sequenceLength; i++) {
+        sequence.push(buttons[Math.floor(Math.random() * Math.floor(3))])
+    }
+
+    console.log('init game sequence: ', sequence)
+
     let time = 0;
     for (let i = 0; i < sequence.length; i++) {
         time += 1000;
@@ -57,4 +69,15 @@ const sequenceEqualCheck = (a, b) => {
     return true;
 }
 
+const nextLevel = () => {
+    document.getElementById('cutout').innerHTML = 'Great! <br> Next Level';
+    setTimeout(() => {
+        document.getElementById('cutout').innerHTML = '';
+    }, 1000);
+    console.log('next level...')
+    sequenceLength += 1;
+    sequence = []
+    playerSequnce = []
+    initGame(sequence)
+}
 setTimeout(initGame(sequence), 1000);
