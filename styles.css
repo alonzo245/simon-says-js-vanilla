@@ -15,7 +15,7 @@ body {
 
 .game {
   position: relative;
-  background-color: black;
+  background-color: #fff;
   width: 700px;
   border-radius: 50%;
 }
@@ -52,11 +52,17 @@ body {
 
 .quarter-circle {
   position: absolute;
-
   width: 50%;
   height: 50%;
   border: 10px solid black;
 }
+.quarter-circle:hover{
+    opacity: 0.8;
+}
+.quarter-circle:active{
+    opacity: 0.5;
+}
+
 .cutout {
   border: 20px solid black;
   width: 50%;
